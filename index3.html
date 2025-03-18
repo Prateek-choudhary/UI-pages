@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortgage Calculator</title>
+    <!--Bootstrap CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--Bootstrap Icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+         body {
+            background-color: #f8f9fa;
+        }
+        .calculator-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #0d6efd;
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 1.5rem;
+        }
+        .form-label {
+            font-weight: 500;
+        }
+        .input-group-text {
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+        }
+        .btn-calculate {
+            background-color: #0d6efd;
+            border: none;
+            padding: 10px 20px;
+        }
+        .btn-calculate:hover {
+            background-color: #0b5ed7;
+        }
+        .result-card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        .result-card:hover {
+            transform: translateY(-5px);
+        }
+        .result-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #0d6efd;
+        }
+        .result-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        .range-value {
+            font-weight: bold;
+            color: #0d6efd;
+        }
+        .form-range::-webkit-slider-thumb {
+            background: #0d6efd;
+        }
+        .form-range::-moz-range-thumb {
+            background: #0d6efd;
+        }
+        @media (max-width: 768px) {
+            .result-value {
+                font-size: 1.2rem;
+            }
+    </style>
+</head>
+<body>
+    <div class="container py-5 calculator-container">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2 class="mb-0"><i class="bi bi-house-door me-2"></i>Mortgage Calculator</h2>
+                <p class="mb-0 mt-2">Calcuate yout monthly mortgage payment, total i nterest and more</p>
+            </div>
+            <div class="card-body p-4">
+                <form id="mortgage-form">
+                    <div class="row g-4">
+                        <!--Home Price-->
+                        <div class="col-md-6">
+                            <label for="homePrice" class="form-label">Home Price</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="bibi-currency-dollar"></i></span>
+                                 <input type="number" class="form-cantrol" id="homePrice" placeholder="300,000" value="300000">
+                            </div>
+                        </div>
+
+                        <!--Down Payment-->
+                        <div class="col-md-6">
+                            <label for="downPayment" class="form-label">Down Payment</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="bibi-currency-dollar"></i></span>
+                                <input type="number" class="form-cantrol" id="downPayment" placeholder="60,000" value="60000">
+                            </div>
+                            <div class="text-end">
+                                <span id="downPaymentPercentage" class="range-value">20%</span> of home price
+                            </div>
+                        </div>
+
+                        <!--Loan Term-->
+                         <div class="col-md-6">
+                            <label for="longTerm" class="form-label">Loan Term (Years)
+                            </label>
+                            <select class="form-select" id="loanTerm">
+                                <option value="30">30 years</option>
+                                <option value="20">20 years</option>
+                                <option value="15">15 years</option>
+                                <option value="10">10 years</option>
+                            </select>
+                         </div>
+
+                         <!-- Interest Rate-->
+                        <div class="col-md-6">
+                            <label for="interestRate" class="form-label">Interest Rate(%)</label>
+                            <div class="mb-3">
+                                <input type="range" class="form-range" min="0.1" max="10" step="0.1" id="interestRate" value="4.5">
+                                <div class="d-flex justify-content-between">
+                                    <span>0.1%</span>
+                                    <span id="interestRateValue" class="range-value">4.5%</span>
+                                    <span>10%</span>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- Property Tax-->
+                         <div class="col-md-6">
+                            <label for="peopertyTax" class="form-label">Annual Property Tax</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="bibi-currency-dollar"></i></i></span>
+                                <input type="number" class="form-cantrol" id="propertyTax" placeholder="3,600" value="3600">
+                            </div>
+                         </div>
+
+                        <!-- Home Insurance-->
+                         <div class="col-md-6">
+                            <label for="homeInsurance" class="form-label">Annual Home Insurance</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="bibi-currency-dollar"></i></i></span>
+                                <input type="number" class="form-cantrol" id="homeInsurance" placeholder="1,200" value="1200">
+                            </div>
+                          </div>
+                         
+                        <!-- Calculate Button-->
+                         <div class="col-12 text-center mt-4">
+                            <button type="button" id="calculatebtn" class="btn btn-calculate btn-lg">
+                                <i class="bi bi-calculator me-2"></i>Calculate Mortgage
+                            </button>
+                         </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+         
+        <!--Results Sections-->
+    <div id="results" class="row g-4 mb-4">
+        <div class="col-md-6 col-lg-3">
+                <div class="card result-card bg-white p-3 text-center h-100">
+                <div class="card-body">
+                    <i class="bi bi-calendar-month text-primary mb-3"style="font-size: 2rem;"></i>
+                    <div class="result-value" id="monthlyPayment">$1,520</div>
+                     <div class="result-label">monthly Payments</div>
+                </div>
+            </div>
+        </div>  
+        
+        <div class="col-md-6 col-lg-3">
+            <div class="card result-card bg-white p-3 text-center h-100">
+                <div class="card-body">
+                    <i class="bi bi-cash-stack text-primary mb-3" style="font-size:2rem ;"></i>
+                    <div class="result-value" id="loanAmount">$240,000</div>
+                    <div class="result-label">Loan Amount</div>
+                </div>
+            </div>
+        </div>
+         <div class="col-md-6 col-lg-3">
+            <div class="card result-card bg-white p-3 text-center h-100">
+                <div class="card-body">
+                    <i class="bi bi-graph-up-arrow text-primary mb-3" style="font-size:2rem ;"></i>
+                    <div class="result-value" id="totalInterest">$187,200</div>
+                    <div class="result-label">Total Interest</div>
+                </div>
+            </div>
+         </div>
+         <div class="col-md-6 col-lg-3">
+            <div class="card result-card bg-white p-3 text-center h-100">
+                <div class="card-body">
+                    <i class="bi bi-piggy-bank text-primary mb-3" style="font-size:2rem ;"></i>
+                    <div class="result-value" id="totalInterest">$547,200</div>
+                    <div class="result-label">Total Cost</div>
+                </div>
+            </div>
+         </div>
+        <!--Amortization Chart Placeholder-->
+         <div class="card">
+            <div class="card-header">
+                <h3 class="mb-0"><i class="bi bi-graph-down me-2"></i>Amortization Schedule</h3> 
+            </div>
+            <div class="card-body p-4">
+                <p class="text-center text-muted">Your payment breakdown overtime would appear here.</p>
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Pro tip:</strong>Making extra payment towards Your principal
+                    can significantly reduce your loan term and total 
+                    interest paid.
+                </div>
+            </div>
+         </div>
+    </div>
+    
+</body>
+</html>
