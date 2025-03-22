@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile - Bootstrap</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <style>
+    .cover-container {
+      height: 300px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .profile-picture {
+      width: 150px;
+      height: 150px;
+      border: 4px solid white;
+      margin-top: -75px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .online-indicator {
+      width: 16px;
+      height: 16px;
+      background-color: #10b981;
+      border: 2px solid white;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
+    
+    .profile-stats .card {
+      transition: all 0.2s ease;
+    }
+    
+    .profile-stats .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .friend-card {
+      transition: all 0.2s ease;
+    }
+    
+    .friend-card:hover {
+      background-color: #f8f9fa;
+    }
+    
+    .photo-grid img {
+      aspect-ratio: 1;
+      object-fit: cover;
+      transition: all 0.3s ease;
+    }
+    
+    .photo-grid .photo-container:hover img {
+      transform: scale(1.05);
+    }
+    
+    .photo-container {
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .photo-overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0,0,0,0.4);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .photo-container:hover .photo-overlay {
+      opacity: 1;
+    }
+    
+    .post-card {
+      margin-bottom: 1.5rem;
+    }
+    
+    .badge-pro {
+      background-color: #f0f0f0;
+      color: #6c757d;
+      font-weight: 500;
+      font-size: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="#">SocialConnect</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="bi bi-house-door"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#"><i class="bi bi-person"></i> Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="bi bi-bell"></i> Notifications</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="bi bi-envelope"></i> Messages</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search">
+          <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Cover Photo -->
+  <div class="cover-container">
+    <img src="https://via.placeholder.com/1600x800" alt="Cover Photo" class="w-100 h-100 object-fit-cover">
+  </div>
+
+  <div class="container">
+    <!-- Profile Header -->
+    <div class="row">
+      <div class="col-md-3 text-center text-md-start">
+        <div class="position-relative d-inline-block">
+          <img src="https://via.placeholder.com/300" alt="Alex Johnson" class="rounded-circle profile-picture">
+          <div class="online-indicator"></div>
+        </div>
+      </div>
+      <div class="col-md-9 mt-3 mt-md-0">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+          <div>
+            <div class="d-flex align-items-center">
+              <h2 class="mb-0">Alex Johnson</h2>
+              <span class="badge badge-pro ms-2" data-bs-toggle="tooltip" title="Premium member since 2022">Pro</span>
+            </div>
+            <p class="text-muted mb-1">@alexjohnson</p>
+          </div>
+          <div class="mt-2 mt-md-0">
+            <button class="btn btn-primary me-2"><i class="bi bi-chat-square-text me-1"></i> Message</button>
+            <button class="btn btn-outline-primary me-2"><i class="bi bi-person-plus me-1"></i> Follow</button>
+            <button class="btn btn-light"><i class="bi bi-three-dots"></i></button>
+          </div>
+        </div>
+        
+        <div class="mt-3 d-flex flex-wrap gap-3 text-muted">
+          <div><i class="bi bi-geo-alt me-1"></i> San Francisco, CA</div>
+          <div><i class="bi bi-briefcase me-1"></i> Product Designer at Designco</div>
+          <div><i class="bi bi-calendar3 me-1"></i> Joined March 2018</div>
+          <div><i class="bi bi-link-45deg me-1"></i> <a href="#" class="text-decoration-none">alexjohnson.design</a></div>
+        </div>
+        
+        <p class="mt-3">
+          Product designer and photography enthusiast. Passionate about creating intuitive user experiences and exploring the world through my lens.
+        </p>
+      </div>
+    </div>
+    
+    <!-- Profile Stats -->
+    <div class="row profile-stats mt-4 g-3">
+      <div class="col-6 col-md-3">
+        <div class="card text-center py-3">
+          <h4 class="mb-0">1,248</h4>
+          <small class="text-muted">Posts</small>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card text-center py-3">
+          <h4 class="mb-0">4.2K</h4>
+          <small class="text-muted">Followers</small>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card text-center py-3">
+          <h4 class="mb-0">567</h4>
+          <small class="text-muted">Following</small>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card text-center py-3">
+          <h4 class="mb-0">128</h4>
+          <small class="text-muted">Collections</small>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Profile Tabs -->
+    <ul class="nav nav-tabs mt-4" id="profileTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="posts-tab" data-bs-toggle="tab" data-bs-target="#posts" type="button" role="tab">Posts</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" type="button" role="tab">About</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="friends-tab" data-bs-toggle="tab" data-bs-target="#friends" type="button" role="tab">Friends</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="photos-tab" data-bs-toggle="tab" data-bs-target="#photos" type="button" role="tab">Photos</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="more-tab" data-bs-toggle="tab" data-bs-target="#more" type="button" role="tab">More</button>
+      </li>
+    </ul>
+    
+    <!-- Tab Content -->
+    <div class="tab-content py-4" id="profileTabsContent">
+      <!-- Posts Tab -->
+      <div class="tab-pane fade show active" id="posts" role="tabpanel">
+        <div class="post-card card">
+          <div class="card-header bg-white d-flex align-items-center">
+            <img src="https://via.placeholder.com/300" alt="Alex Johnson" class="rounded-circle me-2" width="40" height="40">
+            <div>
+              <h6 class="mb-0">Alex Johnson</h6>
+              <small class="text-muted">2 hours ago</small>
+            </div>
+            <button class="btn btn-sm btn-light ms-auto"><i class="bi bi-three-dots"></i></button>
+          </div>
+          <div class="card-body">
+            <p>Just finished my latest UI design project! Really proud of how the dashboard turned out. What do you think?</p>
+            <img src="https://via.placeholder.com/800x600" alt="Design Project" class="img-fluid rounded mb-3">
+            <div class="d-flex justify-content-between">
+              <div>
+                <button class="btn btn-sm btn-light me-2"><i class="bi bi-heart me-1"></i> 142</button>
+                <button class="btn btn-sm btn-light me-2"><i class="bi bi-chat me-1"></i> 38</button>
+                <button class="btn btn-sm btn-light"><i class="bi bi-share"></i></button>
+              </div>
+              <button class="btn btn-sm btn-light"><i class="bi bi-bookmark"></i></button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="post-card card">
+          <div class="card-header bg-white d-flex align-items-center">
+            <img src="https://via.placeholder.com/300" alt="Alex Johnson" class="rounded-circle me-2" width="40" height="40">
+            <div>
+              <h6 class="mb-0">Alex Johnson</h6>
+              <small class="text-muted">1 day ago</small>
+            </div>
+            <button class="btn btn-sm btn-light ms-auto"><i class="bi bi-three-dots"></i></button>
+          </div>
+          <div class="card-body">
+            <p>Beautiful sunset at Baker Beach yesterday. The Golden Gate Bridge looks magical at this time of day.</p>
+            <img src="https://via.placeholder.com/800x600" alt="Sunset Photo" class="img-fluid rounded mb-3">
+            <div class="d-flex justify-content-between">
+              <div>
+                <button class="btn btn-sm btn-light me-2"><i class="bi bi-heart me-1"></i> 287</button>
+                <button class="btn btn-sm btn-light me-2"><i class="bi bi-chat me-1"></i> 54</button>
+                <button class="btn btn-sm btn-light"><i class="bi bi-share"></i></button>
+              </div>
+              <button class="btn btn-sm btn-light"><i class="bi bi-bookmark"></i></button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="post-card card">
+          <div class="card-header bg-white d-flex align-items-center">
+            <img src="https://via.placeholder.com/300" alt="Alex Johnson" class="rounded-circle me-2" width="40" height="40">
+            <div>
+              <h6 class="mb-0">Alex Johnson</h6>
+              <small class="text-muted">3 days ago</small>
+            </div>
+            <button class="btn btn-sm btn-light ms-auto"><i class="bi bi-three-dots"></i></button>
+          </div>
+          <div class="card-body">
+            <p>Excited to announce that I'll be speaking at the Design Systems Conference next month! If you're attending, let's connect!</p>
+            <div class="d-flex justify-content-between">
+              <div>
+                <button class="btn btn-sm btn-light me-2"><i class="bi bi-heart me-1"></i> 93</button>
+                <button class="btn btn-sm btn-light me-2"><i class="bi bi-chat me-1"></i> 21</button>
+                <button class="btn btn-sm btn-light"><i class="bi bi-share"></i></button>
+              </div>
+              <button class="btn btn-sm btn-light"><i class="bi bi-bookmark"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- About Tab -->
+      <div class="tab-pane fade" id="about" role="tabpanel">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">About</h5>
+            <small class="text-muted">Personal information</small>
+          </div>
+          <div class="card-body">
+            <div class="mb-4">
+              <h6>Bio</h6>
+              <p class="text-muted">
+                Product designer and photography enthusiast with over 7 years of experience creating intuitive digital experiences. 
+                I specialize in user-centered design processes and have worked with startups and established companies across various industries.
+                When I'm not designing, you can find me exploring the outdoors with my camera or experimenting with new cooking recipes.
+              </p>
+            </div>
+            
+            <hr>
+            
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <h6>Work</h6>
+                <div class="mt-3">
+                  <div class="d-flex mb-3">
+                    <i class="bi bi-briefcase text-muted me-2 mt-1"></i>
+                    <div>
+                      <div class="fw-medium">Product Designer</div>
+                      <div class="text-muted small">Designco • 2020 - Present</div>
+                    </div>
+                  </div>
+                  <div class="d-flex mb-3">
+                    <i class="bi bi-briefcase text-muted me-2 mt-1"></i>
+                    <div>
+                      <div class="fw-medium">UI/UX Designer</div>
+                      <div class="text-muted small">TechStart Inc. • 2018 - 2020</div>
+                    </div>
+                  </div>
+                  <div class="d-flex">
+                    <i class="bi bi-briefcase text-muted me-2 mt-1"></i>
+                    <div>
+                      <div class="fw-medium">Junior Designer</div>
+                      <div class="text-muted small">CreativeAgency • 2016 - 2018</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-6 mt-4 mt-md-0">
+                <h6>Education</h6>
+                <div class="mt-3">
+                  <div class="d-flex mb-3">
+                    <i class="bi bi-mortarboard text-muted me-2 mt-1"></i>
+                    <div>
+                      <div class="fw-medium">Master of Design</div>
+                      <div class="text-muted small">California Design Institute • 2014 - 2016</div>
+                    </div>
+                  </div>
+                  <div class="d-flex">
+                    <i class="bi bi-mortarboard text-muted me-2 mt-1"></i>
+                    <div>
+                      <div class="fw-medium">Bachelor of Arts in Visual Communication</div>
+                      <div class="text-muted small">State University • 2010 - 2014</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <hr>
+            
+            <div class="mb-4">
+              <h6>Skills</h6>
+              <div class="mt-2">
+                <span class="badge bg-light text-dark me-2 mb-2">UI/UX Design</span>
+                <span class="badge bg-light text-dark me-2 mb-2">Product Design</span>
+                <span class="badge bg-light text-dark me-2 mb-2">Wireframing</span>
+                <span class="badge bg-light text-dark me-2 mb-2">Prototyping</span>
+                <span class="badge bg-light text-dark me-2 mb-2">User Research</span>
+                <span class="badge bg-light text-dark me-2 mb-2">Figma</span>
+                <span class="badge bg-light text-dark me-2 mb-2">Adobe XD</span>
+                <span class="badge bg-light text-dark me-2 mb-2">Sketch</span>
+                <span class="badge bg-light text-dark me-2 mb-2">Photography</span>
+              </div>
+            </div>
+            
+            <hr>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <h6>Location</h6>
+                <div class="d-flex align-items-center mt-2">
+                  <i class="bi bi-geo-alt text-muted me-2"></i>
+                  <span>San Francisco, California</span>
+                </div>
+              </div>
+              
+              <div class="col-md-6 mb-3">
+                <h6>Joined</h6>
+                <div class="d-flex align-items-center mt-2">
+                  <i class="bi bi-calendar3 text-muted me-2"></i>
+                  <span>March 2018</span>
+                </div>
+              </div>
+              
+              <div class="col-md-6 mb-3">
+                <h6>Relationship</h6>
+                <div class="d-flex align-items-center mt-2">
+                  <i class="bi bi-heart text-muted me-2"></i>
+                  <span>Single</span>
+                </div>
+              </div>
+              
+              <div class="col-md-6 mb-3">
+                <h6>Website</h6>
+                <div class="d-flex align-items-center mt-2">
+                  <i class="bi bi-globe text-muted me-2"></i>
+                  <a href="#" class="text-decoration-none">alexjohnson.design</a>
+                </div>
+              </div>
+              
+              <div class="col-md-6 mb-3">
+                <h6>Email</h6>
+                <div class="d-flex align-items-center mt-2">
+                  <i class="bi bi-envelope text-muted me-2"></i>
+                  <span>alex@designco.com</span>
+                </div>
+              </div>
+              
+              <div class="col-md-6 mb-3">
+                <h6>Phone</h6>
+                <div class="d-flex align-items-center mt-2">
+                  <i class="bi bi-telephone text-muted me-2"></i>
+                  <span>+1 (555) 123-4567</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Friends Tab -->
+      <div class="tab-pane fade" id="friends" role="tabpanel">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">Friends</h5>
+            <small class="text-muted">You have 248 friends</small>
+            <div class="input-group mt-3">
+              <span class="input-group-text bg-light border-end-0"><i class="bi bi-search"></i></span>
+              <input type="text" class="form-control border-start-0" placeholder="Search friends...">
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-md-6 col-lg-4">
+                <div class="card friend-card p-3">
+                  <div class="d-flex">
+                    <img src="https://via.placeholder.com/100" alt="Sarah Chen" class="rounded-circle me-3" width="50" height="50">
+                    <div class="flex-grow-1">
+                      <h6 class="mb-0">Sarah Chen</h6>
+                      <div class="text-muted small">@sarahchen</div>
+                      <div class="text-muted small">12 mutual friends</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary align-self-start">View</button>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-6 col-lg-4">
+                <div class="card friend-card p-3">
+                  <div class="d-flex">
+                    <img src="https://via.placeholder.com/100" alt="Michael Rodriguez" class="rounded-circle me-3" width="50" height="50">
+                    <div class="flex-grow-1">
+                      <h6 class="mb-0">Michael Rodriguez</h6>
+                      <div class="text-muted small">@mrodriguez</div>
+                      <div class="text-muted small">8 mutual friends</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary align-self-start">View</button>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-6 col-lg-4">
+                <div class="card friend-card p-3">
+                  <div class="d-flex">
+                    <img src="https://via.placeholder.com/100" alt="Emma Wilson" class="rounded-circle me-3" width="50" height="50">
+                    <div class="flex-grow-1">
+                      <h6 class="mb-0">Emma Wilson</h6>
+                      <div class="text-muted small">@emmaw</div>
+                      <div class="text-muted small">15 mutual friends</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary align-self-start">View</button>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-6 col-lg-4">
+                <div class="card friend-card p-3">
+                  <div class="d-flex">
+                    <img src="https://via.placeholder.com/100" alt="David Kim" class="rounded-circle me-3" width="50" height="50">
+                    <div class="flex-grow-1">
+                      <h6 class="mb-0">David Kim</h6>
+                      <div class="text-muted small">@davidkim</div>
+                      <div class="text-muted small">6 mutual friends</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary align-self-start">View</button>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-6 col-lg-4">
+                <div class="card friend-card p-3">
+                  <div class="d-flex">
+                    <img src="https://via.placeholder.com/100" alt="Olivia Taylor" class="rounded-circle me-3" width="50" height="50">
+                    <div class="flex-grow-1">
+                      <h6 class="mb-0">Olivia Taylor</h6>
+                      <div class="text-muted small">@oliviat</div>
+                      <div class="text-muted small">3 mutual friends</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary align-self-start">View</button>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-6 col-lg-4">
+                <div class="card friend-card p-3">
+                  <div class="d-flex">
+                    <img src="https://via.placeholder.com/100" alt="James Wilson" class="rounded-circle me-3" width="50" height="50">
+                    <div class="flex-grow-1">
+                      <h6 class="mb-0">James Wilson</h6>
+                      <div class="text-muted small">@jameswilson</div>
+                      <div class="text-muted small">9 mutual friends</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary align-self-start">View</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Photos Tab -->
+      <div class="tab-pane fade" id="photos" role="tabpanel">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">Photos</h5>
+            <small class="text-muted">You have 128 photos in 8 albums</small>
+            <ul class="nav nav-pills mt-3" id="photoTabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="recent-photos-tab" data-bs-toggle="pill" data-bs-target="#recent-photos" type="button" role="tab">Recent Photos</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="photo-albums-tab" data-bs-toggle="pill" data-bs-target="#photo-albums" type="button" role="tab">Albums</button>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body">
+            <div class="tab-content" id="photoTabsContent">
+              <div class="tab-pane fade show active" id="recent-photos" role="tabpanel">
+                <div class="row g-3 photo-grid">
+                  <div class="col-6 col-md-4 col-lg-3">
+                    <div class="photo-container rounded">
+                      <img src="https://via.placeholder.com/300" alt="Photo 1" class="img-fluid rounded">
+                      <div class="photo-overlay rounded"></div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-md-4 col-lg-3">
+                    <div class="photo-container rounded">
+                      <img src="https://via.placeholder.com/300" alt="Photo 2" class="img-fluid rounded">
+                      <div class="photo-overlay rounded"></div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-md-4 col-lg-3">
+                    <div class="photo-container rounded">
+                      <img src="https://via.placeholder.com/300" alt="Photo 3" class="img-fluid rounded">
+                      <div class="photo-overlay rounded"></div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-md-4 col-lg-3">
+                    <div class="photo-container rounded">
+                      <img src="https://via.placeholder.com/300" alt="Photo 4" class="img-fluid rounded">
+                      <div class="photo-overlay rounded"></div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-md-4 col-lg-3">
+                    <div class="photo-container rounded">
+                      <img src="https://via.placeholder.com/300" alt="Photo 5" class="img-fluid rounded">
+                      <div class="photo-overlay rounded"></div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-md-4 col-lg-3">
+                    <div class="photo-container rounded">
+                      <img src="https://via.placeholder.com/300" alt="Photo 6" class="img-fluid rounded">
+                      <div class="photo-overlay rounded"></div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-md-4 col-lg-3">
+                    <div class="photo-container rounded">
+                      <img src="https://via.placeholder.com/300" alt="Photo 7" class="img-fluid rounded">
+                      <div class="photo-overlay rounded"></div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-md-4 col-lg-3">
+                    <div class="photo-container rounded">
+                      <img src="https://via.placeholder.com/300" alt="Photo 8" class="img-fluid rounded">
+                      <div class="photo-overlay rounded"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="photo-albums" role="tabpanel">
+                <div class="row g-4">
+                  <div class="col-md-6 col-lg-3">
+                    <div class="card h-100">
+                      <div class="photo-container rounded">
+                        <img src="https://via.placeholder.com/300" alt="Travel Album" class="img-fluid rounded">
+                        <div class="photo-overlay rounded"></div>
+                      </div>
+                      <div class="card-body">
+                        <h6 class="card-title">Travel</h6>
+                        <p class="card-text text-muted small">24 photos</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6 col-lg-3">
+                    <div class="card h-100">
+                      <div class="photo-container rounded">
+                        <img src="https://via.placeholder.com/300" alt="Design Work Album" class="img-fluid rounded">
+                        <div class="photo-overlay rounded"></div>
+                      </div>
+                      <div class="card-body">
+                        <h6 class="card-title">Design Work</h6>
+                        <p class="card-text text-muted small">18 photos</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6 col-lg-3">
+                    <div class="card h-100">
+                      <div class="photo-container rounded">
+                        <img src="https://via.placeholder.com/300" alt="Nature Album" class="img-fluid rounded">
+                        <div class="photo-overlay rounded"></div>
+                      </div>
+                      <div class="card-body">
+                        <h6 class="card-title">Nature</h6>
+                        <p class="card-text text-muted small">32 photos</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6 col-lg-3">
+                    <div class="card h-100">
+                      <div class="photo-container rounded">
+                        <img src="https://via.placeholder.com/300" alt="Food Album" class="img-fluid rounded">
+                        <div class="photo-overlay rounded"></div>
+                      </div>
+                      <div class="card-body">
+                        <h6 class="card-title">Food</h6>
+                        <p class="card-text text-muted small">15 photos</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- More Tab -->
+      <div class="tab-pane fade" id="more" role="tabpanel">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="mb-3">More options</h5>
+            <p class="text-muted">Additional profile sections would appear here.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="bg-light mt-5 py-4">
+    <div class="container text-center text-muted">
+      <p class="mb-0">© 2025 SocialConnect. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Initialize tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+  </script>
+</body>
+</html>
